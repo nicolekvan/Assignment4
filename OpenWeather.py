@@ -1,11 +1,7 @@
 # openweather.py
 
-# Starter code for assignment 4 in ICS 32
-# Programming with Software Libraries in Python
+# Nicole Kwan
+# nkwan3@uci.edu
+# 76647093
 
-# Replace the following placeholders with your information.
-
-# NAME
-# EMAIL
-# STUDENT ID
-
+# A module for interacting with the OpenWeather API

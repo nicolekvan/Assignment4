@@ -1,13 +1,10 @@
 # webapi.py
 
-# Starter code for assignment 4 in ICS 32
-# Programming with Software Libraries in Python
+# Nicole Kwan
+# nkwan3@uci.edu
+# 76647093
 
-# Replace the following placeholders with your information.
-
-# NAME
-# EMAIL
-# STUDENT ID
+# A base class module that provides access to common features for your API modules
 
 from abc import ABC, abstractmethod
 
