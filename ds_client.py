@@ -2,9 +2,7 @@
 
 # Replace the following placeholders with your information.
 
-# Nicole Kwan
-# nkwan3@uci.edu
-# 76647093
+
 import socket
 import json
 import time

@@ -12,8 +12,6 @@ import urllib
 
 class WebAPI(ABC):
 
-
-
   def _download_url(self, url: str) -> dict:
     #TODO: Implement web api request code in a way that supports
     # all types of web APIs
@@ -27,18 +25,21 @@ class WebAPI(ABC):
         r_obj = json.loads(json_results)
 
     except urllib.error.HTTPError as e:
-        print('Failed to download contents of URL')
-        print('Status code: {}'.format(e.code))
+            print('Failed to download contents of URL')
+            print('Status code: {}'.format(e.code))
+    except urllib.error.URLError as e:
+        print("Error: Failed to connect to the remote API: ", e)
+    except ValueError as e:
+        print("Error: ", e)
 
     finally:
         if response != None:
             response.close()
     
     return r_obj
-    pass
 
   def set_apikey(self, apikey:str) -> None:
-    my_api = apikey
+    self.apikey = apikey
 
   @abstractmethod
   def load_data(self):

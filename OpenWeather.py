@@ -7,45 +7,14 @@
 # A module for interacting with the OpenWeather API
 # API KEY: 510bd492cb913279a6869bd146ca2a62
 
+from WebAPI import WebAPI
 import urllib, json
 from urllib import request, error
 
-class OpenWeather():
+class OpenWeather(WebAPI):
     def __init__(self, zipcode, ccode):
         self.zipcode = zipcode
         self.ccode = ccode
-
-    def _download_url(self, url_to_download: str) -> dict:
-        response = None
-        r_obj = None
-
-        try:
-            response = urllib.request.urlopen(url_to_download)
-            json_results = response.read()
-            r_obj = json.loads(json_results)
-
-        except urllib.error.HTTPError as e:
-            print('Failed to download contents of URL')
-            print('Status code: {}'.format(e.code))
-        except urllib.error.URLError as e:
-            print("Error: Failed to connect to the remote API: ", e)
-        except ValueError as e:
-            print("Error: ", e)
-
-        finally:
-            if response != None:
-                response.close()
-        
-        return r_obj
-
-    def set_apikey(self, apikey:str) -> None:
-        '''
-        Sets the apikey required to make requests to a web API.
-        :param apikey: The apikey supplied by the API service
-        '''
-        #TODO: assign apikey value to a class data attribute that can be accessed by class members
-
-        self.apikey = apikey
 
     def load_data(self) -> None:
         '''
@@ -68,3 +37,29 @@ class OpenWeather():
         self.sunset = weather_obj["sys"]["sunset"]
 
         return weather_obj
+    
+    def transclude(self, message:str) -> str:
+        word_list = message.split()  # Split the message into a list of words
+        transcluded_msg = []
+        for word in word_list:
+            if "@weather" in word:
+                if "." in word:
+                    transcluded_msg.append(self.description + ".")
+                else:
+                    transcluded_msg.append(self.description)
+            elif "@temperature" in word:
+                if "." in word:
+                    transcluded_msg.append(str(self.temperature) + ".")
+                else:
+                    transcluded_msg.append(str(self.temperature))
+            elif "@city" in word:
+                if "." in word:
+                    transcluded_msg.append(self.city + ".")
+                else:
+                    transcluded_msg.append(self.city)
+            else:
+                transcluded_msg.append(word)
+        
+        j_msg = ' '.join(transcluded_msg)
+        return j_msg
+

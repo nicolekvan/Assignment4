@@ -34,7 +34,14 @@ def print_menu():
           I - Post on the Internet
             'i -post': Post on ICS 32 Distributed Social
             'i -bio': Change bio on Distributed Social profile
-
           """)
-    print("Format: COMMAND INPUT -OPTION INPUT")
     print("-----------------------------------")
+
+def transcluding():
+    print("""
+    You chose to post a transclusion! Here's how:
+      '@weather - Weather forecast
+      '@temperature - Temperature
+      '@city - City
+          
+      '@lastfm' - One of your favorite artist's top songs!""")

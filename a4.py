@@ -5,7 +5,7 @@
 # 76647093
 
 from ui import *
-from menu import print_menu
+from menu import *
 
 # /Users/nicolekwan/Workspace/journal.dsu
 
@@ -14,7 +14,7 @@ def main():
         print_menu()
         while True:
             commands = ["l", "q", "c", "d", "r", "o", "e", "p", "i"]
-            user_input = input("\nEnter: ")
+            user_input = input("\nEnter Command: ")
             command, *args = user_input.split()
 
             if command in commands:
