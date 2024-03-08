@@ -39,7 +39,6 @@ class WebAPI(ABC):
 
   def set_apikey(self, apikey:str) -> None:
     my_api = apikey
-    return my_api
 
   @abstractmethod
   def load_data(self):

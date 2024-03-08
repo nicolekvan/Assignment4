@@ -46,7 +46,6 @@ class OpenWeather():
         #TODO: assign apikey value to a class data attribute that can be accessed by class members
 
         self.apikey = apikey
-        return self.apikey
 
     def load_data(self) -> None:
         '''
@@ -64,7 +63,7 @@ class OpenWeather():
         self.latitude = weather_obj["coord"]["lat"]
         self.description = weather_obj["weather"][0]["description"]
         self.humidity = weather_obj["main"]["humidity"]
-        self.wind = weather_obj["wind"]["speeed"]
+        self.wind = weather_obj["wind"]["speed"]
         self.city = weather_obj["name"]
         self.sunset = weather_obj["sys"]["sunset"]
 

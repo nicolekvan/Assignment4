@@ -59,3 +59,10 @@ print(f"The coordinates for {zipcode} are {open_weather.longitude} longitude and
 print(f"The current weather for {zipcode} is {open_weather.description}")
 print(f"The current humidity for {zipcode} is {open_weather.humidity}")
 print(f"The sun will set in {open_weather.city} at {open_weather.sunset}")
+
+from LastFM import LastFM
+
+lastfm = LastFM("Drake")
+lastfm.set_apikey("333f89108e46378e606ff438072d6d87")
+lastfm.load_data()
+print(lastfm.tracks)
