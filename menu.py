@@ -39,9 +39,10 @@ def print_menu():
 
 def transcluding():
     print("""
-    You chose to post a transclusion! Here's how:
+    Post in-time messages with your message:
       '@weather - Weather forecast
       '@temperature - Temperature
       '@city - City
           
-      '@lastfm' - One of your favorite artist's top songs!""")
+      '@lastfm' - One of your favorite artist's top songs!
+          """)

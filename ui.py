@@ -5,6 +5,9 @@
 from pathlib import Path
 from Profile import *
 from ds_client import send
+from menu import transcluding
+from LastFM import LastFM
+from OpenWeather import OpenWeather
 
 def print_directory(args):
     path = Path(args[0])
@@ -191,6 +194,63 @@ def post_online(path, message, bio=""):
     except FileNotFoundError:
         print(f"File {path} not found.")
 
+def run_api():
+    transcluding()
+    message = input("Enter message: ")
+    if ("@weather" in message or "@city" in message or "@temperature" in message) and "@lastfm" in message:
+        fm_api = input("Enter your LastFM API key: ")
+        weather_api = input("Enter your OpenWeather API key: ")
+
+        artist = input("Enter your favorite artist: ").split()
+        zip = int(input("Enter your zip code: "))
+        if len(artist) > 1:
+            send = "+".join(artist).title()
+        else:
+            send = " ".join(artist).title()
+        
+        fm = LastFM(send)
+        fm.set_apikey(fm_api)
+        fm.load_data()
+
+        weather = OpenWeather(zip, "US")
+        weather.set_apikey(weather_api)
+        weather.load_data()
+
+        text = fm.transclude(message)
+        final = weather.transclude(text)
+        print(final)
+
+        return final
+    elif "@weather" in message or "@city" in message or "@temperature" in message:
+        weather_api = input("Enter your OpenWeather API key: ")
+        zip = int(input("Enter your zip code: "))
+        weather = OpenWeather(zip, "US")
+        weather.set_apikey(weather_api)
+        weather.load_data()
+
+        text = weather.transclude(message)
+        print(text)
+
+        return text
+    
+    elif "@lastfm" in message:
+        fm_api = input("Enter your LastFM API key: ")
+        artist = input("Enter your favorite artist: ").split()
+        if len(artist) > 1:
+            send = "+".join(artist).title()
+        else:
+            send = " ".join(artist).title()
+        
+        fm = LastFM(send)
+        fm.set_apikey(fm_api)
+        fm.load_data()
+        text = fm.transclude(message)
+        print(text)
+
+        return text
+    else:
+        print("Error: No Keyword Found.")
+        return False
 
 
 # RUN METHOD
@@ -248,15 +308,23 @@ def run_edits(command, args):
     elif command.lower() == "i":
         if current_file:
             if "-post" in args:
-                while True:
-                    message = input("Enter post: ").strip()
-                    if message.lower() == "q":
-                        break
-                    if len(message) > 0:
+                api_input = input("Would you like to post a transcluded message? y/n: ")
+                if api_input == "y":
+                    message = run_api()
+                    if message:
                         post_online(current_file, message)
                     else:
-                        print("Not enough characters. Please try again")
-                        continue
+                        print("Error: Please try again")
+                else:
+                    while True:
+                        message = input("Enter post: ").strip()
+                        if message.lower() == "q":
+                            break
+                        if len(message) > 0:
+                            post_online(current_file, message)
+                        else:
+                            print("Not enough characters. Please try again")
+                            continue
             if "-bio" in args:
                 ask = input("Would you like to enter a message? (y/n): ")
                 if ask.lower() == "y":
