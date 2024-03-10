@@ -45,16 +45,28 @@ class OpenWeather(WebAPI):
             if "@weather" in word:
                 if "." in word:
                     transcluded_msg.append(self.description + ".")
+                elif "," in word:
+                    transcluded_msg.append(self.description + ",")
+                elif "!" in word:
+                    transcluded_msg.append(self.description + "!")
                 else:
                     transcluded_msg.append(self.description)
             elif "@temperature" in word:
                 if "." in word:
                     transcluded_msg.append(str(self.temperature) + ".")
+                elif "," in word:
+                    transcluded_msg.append(str(self.temperature) + ",")
+                elif "!" in word:
+                    transcluded_msg.append(str(self.temperature) + "!")
                 else:
                     transcluded_msg.append(str(self.temperature))
             elif "@city" in word:
                 if "." in word:
                     transcluded_msg.append(self.city + ".")
+                elif "," in word:
+                    transcluded_msg.append(self.city + ",")
+                elif "!" in word:
+                    transcluded_msg.append(self.city + "!")
                 else:
                     transcluded_msg.append(self.city)
             else:

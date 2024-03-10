@@ -41,6 +41,10 @@ class LastFM(WebAPI):
             if "@lastfm" in word:
                 if "." in word:
                     transcluded_msg.append(random.choice(self.tracks) + ".")
+                elif "," in word:
+                    transcluded_msg.append(random.choice(self.tracks) + ",")
+                elif "!" in word:
+                    transcluded_msg.append(random.choice(self.tracks) + "!")
                 else:
                     transcluded_msg.append(random.choice(self.tracks))
             else:
