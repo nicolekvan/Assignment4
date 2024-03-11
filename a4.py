@@ -9,6 +9,7 @@ from menu import *
 
 # /Users/nicolekwan/Workspace/journal.dsu
 
+
 def main():
     try:
         print_menu()

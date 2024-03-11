@@ -37,12 +37,13 @@ def print_menu():
           """)
     print("-----------------------------------")
 
+
 def transcluding():
     print("""
     Post in-time messages with your message:
       '@weather - Weather forecast
       '@temperature - Temperature
       '@city - City
-          
+
       '@lastfm' - One of your favorite artist's top songs!
           """)

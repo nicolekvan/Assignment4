@@ -1,12 +1,12 @@
-# Starter code for assignment 3 in ICS 32 Programming with Software Libraries in Python
-
-# Replace the following placeholders with your information.
-
+# Nicole Kwan
+# nkwan3@uci.edu
+# 76647092
 
 import socket
 import json
 import time
 from ds_protocol import extract_json
+
 
 def send(server:str, port:int, username:str, password:str, message:str, bio:str=None):
     response = join_server(server, port, username, password)
@@ -14,18 +14,19 @@ def send(server:str, port:int, username:str, password:str, message:str, bio:str=
     if response.type == "error":
         print(response.message)
         return False
-    
+
     token = response.token
 
     if message:
         if not send_message(server, port, token, "post", message):
             return False
-        
+
     if bio:
         if not send_message(server, port, token, "bio", bio):
             return False
-        
+
     return True
+
 
 def send_message(server, port, token, entry_type, entry):
     message = {
@@ -52,8 +53,9 @@ def send_message(server, port, token, entry_type, entry):
         if get_data.type == "error":
             print(get_data.message)
             return False
-        
+
         return True
+
 
 def join_server(server, port, username, password):
     data = {
@@ -82,4 +84,3 @@ def join_server(server, port, username, password):
         print(get_data.message)
 
     return get_data
-    

@@ -9,6 +9,7 @@ from menu import transcluding
 from LastFM import LastFM
 from OpenWeather import OpenWeather
 
+
 def print_directory(args):
     path = Path(args[0])
 
@@ -23,13 +24,14 @@ def print_directory(args):
             if "-r" in args:
                 print_directory([str(directory)])
 
+
 def output_directory(args):
     path = Path(args[0])
 
-    if path.exists() and path.is_dir(): 
+    if path.exists() and path.is_dir():
         files = [file for file in path.iterdir() if file.is_file()]
         directories = [directory for directory in path.iterdir() if directory.is_dir()]
-        
+
         if "-f" in args:
             for file in files:
                 print(file)
@@ -45,7 +47,7 @@ def output_directory(args):
             for directory in directories:
                 if "-r" in args:
                     output_directory([str(directory)] + args)
-        
+
         if "-e" in args:
             extension = args[-1]
             for file in files:
@@ -56,6 +58,7 @@ def output_directory(args):
                     output_directory([str(directory)] + args)
 
 # PART 2 | .dsu files
+
 
 def create_file(args):
     try:
@@ -71,9 +74,10 @@ def create_file(args):
         print("Great! We saved your profile, so you can come back to your journal in the future.")
         profile.save_profile(str(path))
         return str(path)
-        
+
     except FileExistsError:
         return open_file(path)
+
 
 def delete_file(args):
     path = Path(args[0])
@@ -86,6 +90,7 @@ def delete_file(args):
             print("ERROR")
     except Exception as e:
         return "ERROR"
+
 
 def read_file(args):
     path = Path(args[0])
@@ -100,6 +105,7 @@ def read_file(args):
         except Exception:
             print(f"ERROR")
 
+
 def open_file(path):
     try:
         path = Path(path)
@@ -112,6 +118,7 @@ def open_file(path):
         print(f"File {path} not found.")
     except Exception as e:
         print(f"Error occurred while opening the file: {e}")
+
 
 def edit_file(args):
     try:
@@ -143,7 +150,7 @@ def edit_file(args):
                     print(f"Post with ID {post_id} not found.")
 
             profile.save_profile(str(path))
-            print("Profile successfully updated.")            
+            print("Profile successfully updated.")
         else:
             print(f"File {path} not found.")
     except Exception as e:
@@ -181,6 +188,7 @@ def print_profile(args):
     except Exception as e:
         print(f"Error occurred while printing profile data: {e}")
 
+
 def post_online(path, message, bio=""):
     try:
         profile = Profile()
@@ -193,6 +201,7 @@ def post_online(path, message, bio=""):
 
     except FileNotFoundError:
         print(f"File {path} not found.")
+
 
 def run_api():
     transcluding()
@@ -207,7 +216,7 @@ def run_api():
             send = "+".join(artist).title()
         else:
             send = " ".join(artist).title()
-        
+
         fm = LastFM(send)
         fm.set_apikey(fm_api)
         fm.load_data()
@@ -232,7 +241,7 @@ def run_api():
         print(text)
 
         return text
-    
+
     elif "@lastfm" in message:
         fm_api = input("Enter your LastFM API key: ")
         artist = input("Enter your favorite artist: ").split()
@@ -240,7 +249,7 @@ def run_api():
             send = "+".join(artist).title()
         else:
             send = " ".join(artist).title()
-        
+
         fm = LastFM(send)
         fm.set_apikey(fm_api)
         fm.load_data()
@@ -256,12 +265,13 @@ def run_api():
 # RUN METHOD
 current_file = ""
 
+
 def run(command, args):
     global current_file
     if command.lower() == 'q':
         exit()
 
-    elif command.lower() == 'l': 
+    elif command.lower() == 'l':
         if ("-f" in args) or ("-s" in args) or ("-e" in args):
             output_directory(args)
         elif (args[-1] == "-r") or (len(args) == 1):
@@ -285,12 +295,13 @@ def run(command, args):
             print("ERROR")
         else:
             read_file(args)
-    
+
     elif command.lower() == "o":
         current_file = open_file(args[0])
 
     else:
         print("Error: Please enter a valid command and path")
+
 
 def run_edits(command, args):
     if command.lower() == "e":
@@ -333,7 +344,6 @@ def run_edits(command, args):
                     message = ""
                 bio = input("Enter new bio: ")
                 post_online(current_file, message, bio)
-                
 
         else:
             print("No file is currently opened. Please open a file first.")
