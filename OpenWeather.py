@@ -5,7 +5,6 @@
 # 76647093
 
 # A module for interacting with the OpenWeather API
-# API KEY: 510bd492cb913279a6869bd146ca2a62
 
 from WebAPI import WebAPI
 import urllib, json

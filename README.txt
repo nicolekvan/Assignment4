@@ -1,4 +1,7 @@
 # Assignment4
+# Nicole Kwan
+# nkwan3@uci.edu
+# 76647092
 
 This assignment is a journal/note taking platform that runs on your own
 local desktop. You can record and manage your own notes, or share them

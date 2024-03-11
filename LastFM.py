@@ -5,7 +5,6 @@
 # 76647093
 
 # A module for interacting with the Last.FM API
-# API Key: 333f89108e46378e606ff438072d6d87
 
 from WebAPI import WebAPI
 import random
