@@ -25,12 +25,14 @@ class WebAPI(ABC):
         r_obj = json.loads(json_results)
 
     except urllib.error.HTTPError as e:
-            print('Failed to download contents of URL')
-            print('Status code: {}'.format(e.code))
+        print('Failed to download contents of URL')
+        print('Status code: {}'.format(e.code))
+        raise Exception()
+    
     except urllib.error.URLError as e:
-        print("Error: Failed to connect to the remote API: ", e)
-    except ValueError as e:
-        print("Error: ", e)
+        print('Failed to make a request due to a network problem.')
+        print('Status Code: {}'.format(e.reason))
+        raise Exception()
 
     finally:
         if response != None:

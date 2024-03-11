@@ -11,7 +11,7 @@ import urllib, json
 from urllib import request, error
 
 class OpenWeather(WebAPI):
-    def __init__(self, zipcode, ccode):
+    def __init__(self, zipcode="92617", ccode="US"):
         self.zipcode = zipcode
         self.ccode = ccode
 
